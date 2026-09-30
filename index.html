@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aarav Baral — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#dfe3e8;--ink:#0b0b0c;--muted:#6b7280;--line:rgba(11,11,12,.10);
+  --dark:#0f172a;--cyan:#06b6d4;--amber:#f59e0b;--r-lg:28px;
+  --shadow:0 24px 60px -30px rgba(15,23,42,.35);
+  --ease:cubic-bezier(.2,.7,.2,1);--ease-out:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;padding:14px;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+::selection{background:var(--cyan);color:#fff}
+
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(180deg,#f0f3f6 0%,#d6dbe2 55%,#e8ebef 100%)}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.85;animation:drift 20s ease-in-out infinite}
+.bg i:nth-child(1){width:60vw;height:60vw;left:-14vw;top:-18vw;background:#fff}
+.bg i:nth-child(2){width:46vw;height:46vw;right:-12vw;top:8vw;background:#cfe3ea;animation-delay:-6s}
+.bg i:nth-child(3){width:52vw;height:52vw;left:18vw;bottom:-24vw;background:#fff;animation-delay:-12s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(4vw,-3vw) scale(1.1)}66%{transform:translate(-3vw,3vw) scale(1.05)}}
+
+.grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.32;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/></svg>");
+  animation:grainShift 8s steps(6) infinite}
+@keyframes grainShift{0%{transform:translate(0,0)}20%{transform:translate(-2%,1%)}40%{transform:translate(1%,-2%)}60%{transform:translate(-1%,2%)}80%{transform:translate(2%,1%)}100%{transform:translate(0,0)}}
+
+.shell{max-width:1400px;margin:0 auto;flex:1;min-height:0;width:100%;display:flex;flex-direction:column;gap:12px;position:relative;z-index:3}
+.panel{position:relative;background:rgba(255,255,255,.66);backdrop-filter:blur(26px) saturate(150%);
+  -webkit-backdrop-filter:blur(26px) saturate(150%);border:1px solid rgba(255,255,255,.8);
+  border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+
+@keyframes panelIn{from{opacity:0;transform:translateY(28px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:none}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+@keyframes letterDrop{0%{opacity:0;transform:translateY(-40%) rotateX(-60deg)}60%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes portraitIn{0%{opacity:0;transform:translateY(30px) scale(.9)}70%{opacity:1}100%{opacity:1;transform:none}}
+
+.nav{animation:panelIn .7s var(--ease-out) 0s both}
+.home-hero{animation:panelIn .8s var(--ease-out) .1s both}
+.home-stats{animation:panelIn .8s var(--ease-out) .3s both}
+.foot{animation:panelIn .8s var(--ease-out) .4s both}
+
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;padding:11px 18px;
+  border-radius:999px;font-size:13px;font-weight:500;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);white-space:nowrap}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
+  transform:translateX(-150%);transition:transform .8s var(--ease);pointer-events:none}
+.btn:hover::before{transform:translateX(150%)}
+.btn-dark{background:var(--ink);color:#fff;box-shadow:0 14px 30px -14px rgba(11,11,12,.7)}
+.btn-dark:hover{box-shadow:0 20px 38px -14px rgba(6,182,212,.75);background:#101014}
+.btn-ghost{background:rgba(255,255,255,.9);border:1px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:rgba(6,182,212,.55);box-shadow:0 14px 30px -18px rgba(6,182,212,.8)}
+.btn .arw{transition:transform .3s var(--ease)}
+.btn:hover .arw{transform:translate(3px,-3px)}
+
+.pill{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;
+  background:rgba(255,255,255,.92);border:1px solid var(--line);font-size:12px;
+  transition:.3s var(--ease);position:relative;overflow:hidden;color:var(--ink)}
+.pill:hover{border-color:rgba(6,182,212,.55);box-shadow:0 12px 26px -16px rgba(6,182,212,.9);transform:translateY(-2px)}
+.pill svg{width:14px;height:14px;flex:none;opacity:.8}
+
+.status-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.pill-available{display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 11px;border-radius:999px;
+  background:rgba(255,255,255,.95);border:1px solid var(--line);font-size:12px;color:var(--muted);
+  box-shadow:0 8px 20px -14px rgba(15,23,42,.5)}
+.pill-available i{width:7px;height:7px;border-radius:50%;background:#22c55e;flex:none;
+  box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.pill-now{display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 11px;border-radius:999px;
+  background:rgba(15,23,42,.92);color:#f8fafc;font-size:12px;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 8px 20px -14px rgba(15,23,42,.7)}
+.pill-now b{font-weight:600;color:var(--cyan)}
+.pill-now i{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none;animation:pulse2 1.8s infinite}
+@keyframes pulse2{0%{box-shadow:0 0 0 0 rgba(6,182,212,.6)}70%{box-shadow:0 0 0 8px rgba(6,182,212,0)}100%{box-shadow:0 0 0 0 rgba(6,182,212,0)}}
+
+.nav{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 14px 10px 16px;position:relative}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14.5px}
+.brand .mark{width:26px;height:26px;border-radius:9px;flex:none;background:linear-gradient(135deg,var(--cyan),var(--dark));
+  display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800;font-family:'Archivo',sans-serif;
+  transition:transform .6s var(--ease-out)}
+.brand:hover .mark{transform:rotate(-8deg) scale(1.1)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{position:relative;padding:8px 14px;border-radius:999px;font-size:13px;color:var(--muted);
+  transition:color .28s var(--ease),background .28s var(--ease)}
+.nav-links a::after{content:'';position:absolute;left:14px;right:14px;bottom:6px;height:1.5px;background:var(--cyan);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-out);border-radius:2px}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-links a.active{color:var(--ink);background:rgba(255,255,255,.9)}
+
+.nav-right{display:flex;align-items:center;gap:8px}
+
+.mobile-menu{display:none;position:relative}
+
+.mobile-menu summary{
+  list-style:none;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.9);border:1px solid var(--line);
+  display:grid;place-items:center;
+  cursor:pointer;
+  transition:.3s var(--ease);
+}
+.mobile-menu summary::-webkit-details-marker{display:none}
+.mobile-menu summary:hover{background:var(--ink);color:#fff}
+.mobile-menu summary svg{width:18px;height:18px}
+
+.mobile-menu[open] summary{background:var(--ink);color:#fff}
+
+.mobile-menu-panel{
+  position:absolute;
+  top:calc(100% + 10px);
+  right:0;
+  min-width:220px;
+  display:flex;flex-direction:column;
+  gap:2px;
+  padding:10px;
+  background:#ffffff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 20px 40px -20px rgba(15,23,42,.4);
+  z-index:500;
+}
+.mobile-menu-panel a{
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:14.5px;
+  color:var(--ink);
+  transition:.2s var(--ease);
+}
+.mobile-menu-panel a:hover{background:#f2f4f7}
+.mobile-menu-panel a.active{background:var(--ink);color:#fff}
+
+@media (max-width:860px){
+  .nav-links{display:none !important}
+  .mobile-menu{display:block}
+}
+
+.home-hero{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;padding:14px 40px 18px}
+.hero-top{display:flex;justify-content:center;flex:0 0 auto;animation:fadeUp .8s var(--ease-out) .3s both}
+
+.hero-name{flex:0 0 auto;font-family:'Archivo',sans-serif;font-weight:900;
+  font-size:clamp(38px,6.4vw,100px);line-height:.85;letter-spacing:-.045em;text-align:center;
+  text-transform:uppercase;user-select:none;perspective:1000px}
+.hero-name .word{display:inline-block}
+.hero-name .l{display:inline-block;animation:letterDrop .9s var(--ease-out) both}
+.hero-name .l:nth-child(1){animation-delay:.4s}
+.hero-name .l:nth-child(2){animation-delay:.46s}
+.hero-name .l:nth-child(3){animation-delay:.52s}
+.hero-name .l:nth-child(4){animation-delay:.58s}
+.hero-name .l:nth-child(5){animation-delay:.64s}
+.hero-name .word:nth-child(2) .l:nth-child(1){animation-delay:.72s}
+.hero-name .word:nth-child(2) .l:nth-child(2){animation-delay:.78s}
+.hero-name .word:nth-child(2) .l:nth-child(3){animation-delay:.84s}
+.hero-name .word:nth-child(2) .l:nth-child(4){animation-delay:.90s}
+.hero-name .word:nth-child(2) .l:nth-child(5){animation-delay:.96s}
+.hero-name .outline{color:transparent;-webkit-text-stroke:2.2px var(--cyan);transition:-webkit-text-stroke-color .5s var(--ease)}
+.hero-name .outline:hover{-webkit-text-stroke-color:var(--ink)}
+.hero-name .solid{color:var(--ink)}
+
+.hero-grid{
+  flex:1;min-height:0;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:36px;
+  padding-top:4px;
+  max-width:1240px;
+  margin:0 auto;
+  width:100%;
+}
+
+.hero-left{
+  display:flex;flex-direction:column;gap:12px;
+  animation:fadeLeft .9s var(--ease-out) .55s both;
+  max-width:40ch;
+}
+.hero-left h2{
+  font-family:'Archivo',sans-serif;font-weight:700;
+  font-size:clamp(19px,2vw,26px);
+  letter-spacing:-.025em;line-height:1.18;
+}
+.hero-mission{
+  font-size:13.5px;line-height:1.6;color:#374151;
+  padding-left:12px;
+  border-left:2.5px solid var(--cyan);
+  max-width:38ch;
+}
+.hero-currently{margin-top:6px}
+.hero-currently h4{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;font-weight:500;
+}
+.hero-currently ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.hero-currently li{
+  font-size:12.5px;line-height:1.5;
+  color:#374151;
+  padding-left:14px;position:relative;
+}
+.hero-currently li::before{
+  content:'';position:absolute;left:0;top:7px;
+  width:5px;height:5px;border-radius:50%;background:var(--cyan);
+}
+.hero-currently li strong{font-weight:600;color:var(--ink)}
+.home-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+.home-portrait{
+  justify-self:center;
+  height:100%;
+  max-height:340px;
+  aspect-ratio:3/4;
+  width:auto;
+  border-radius:170px 170px 24px 24px;
+  overflow:hidden;position:relative;
+  background:linear-gradient(165deg,#e9edf1,#bfc9d3);
+  box-shadow:0 40px 70px -40px rgba(15,23,42,.6);
+  animation:portraitIn 1s var(--ease-out) .35s both,glow 6s ease-in-out 1.4s infinite;
+  transition:transform .5s var(--ease);will-change:transform;
+}
+@keyframes glow{0%,100%{box-shadow:0 40px 70px -40px rgba(15,23,42,.6)}50%{box-shadow:0 50px 80px -40px rgba(6,182,212,.45)}}
+.home-portrait img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .8s var(--ease-out)}
+.home-portrait:hover{transform:translateY(-4px)}
+.home-portrait:hover img{transform:scale(1.04)}
+
+.hero-right{
+  display:flex;flex-direction:column;gap:8px;
+  justify-self:end;
+  animation:fadeRight .9s var(--ease-out) .9s both;
+  min-width:160px;
+}
+.hero-right h4{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:2px;font-weight:500;
+  text-align:right;
+}
+.hero-right .pill{
+  min-width:140px;
+  justify-content:flex-start;
+  animation:fadeRight .7s var(--ease-out) both;
+}
+.hero-right .pill:nth-child(2){animation-delay:1s}
+.hero-right .pill:nth-child(3){animation-delay:1.1s}
+.hero-right .pill:nth-child(4){animation-delay:1.2s}
+
+.home-stats{flex:0 0 auto;display:grid;grid-template-columns:repeat(4,1fr);padding:0}
+.home-stats .stat{padding:14px 18px;text-align:center;border-right:1px solid var(--line);position:relative;
+  overflow:hidden;transition:background .35s var(--ease)}
+.home-stats .stat:last-child{border-right:none}
+.home-stats .stat::after{content:'';position:absolute;left:50%;bottom:0;width:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--amber));transform:translateX(-50%);transition:width .5s var(--ease-out)}
+.home-stats .stat:hover{background:rgba(255,255,255,.5)}
+.home-stats .stat:hover::after{width:100%}
+.stat-n{display:block;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(24px,2.4vw,34px);
+  letter-spacing:-.03em;line-height:1;background:linear-gradient(135deg,var(--ink) 40%,var(--cyan) 130%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;
+  transition:transform .4s var(--ease-out)}
+.home-stats .stat:hover .stat-n{transform:scale(1.06)}
+.stat-l{display:block;margin-top:5px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.foot{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:11px 22px;font-size:11.5px;color:var(--muted)}
+.foot a:hover{color:var(--ink)}
+.foot .top{display:inline-flex;align-items:center;gap:7px}
+
+@media (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:26px;justify-items:center;text-align:center}
+  .hero-left{align-items:center;text-align:center;max-width:52ch}
+  .hero-mission{text-align:left}
+  .hero-currently{text-align:left;width:100%}
+  .home-ctas{justify-content:center}
+  .home-portrait{order:-1;max-height:280px;width:min(60vw,240px);height:auto}
+  .hero-right{justify-self:center;flex-direction:row;flex-wrap:wrap;justify-content:center;min-width:0}
+  .hero-right h4{display:none}
+  .hero-right .pill{min-width:0}
+}
+@media (max-width:860px){
+  body{height:auto;min-height:100vh;overflow-y:auto;padding:12px}
+  .shell{height:auto}
+  .nav{padding:10px 12px 10px 14px}
+  .home-hero{padding:20px 22px 26px;gap:14px}
+  .hero-name{font-size:clamp(36px,12vw,76px)}
+  .home-stats{grid-template-columns:1fr 1fr}
+  .home-stats .stat:nth-child(2){border-right:none}
+  .home-stats .stat:nth-child(1),.home-stats .stat:nth-child(2){border-bottom:1px solid var(--line)}
+  .foot{justify-content:center;text-align:center}
+  .grain{opacity:.18}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="shell">
+
+  <nav class="panel nav">
+    <a href="index.html" class="brand"><span class="mark">AB</span> Aarav Baral</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="portfolio.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="portfolio.html" class="btn btn-dark magnetic">Enter Portfolio <span class="arw">↗</span></a>
+      <details class="mobile-menu">
+        <summary aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+          </svg>
+        </summary>
+        <div class="mobile-menu-panel">
+          <a href="index.html" class="active">Home</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="portfolio.html">Contact</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+
+  <section class="panel home-hero">
+    <div class="hero-top">
+      <div class="status-chips">
+        <span class="pill-available"><i></i> Available for collaborations</span>
+        <span class="pill-now"><i></i> Now: <b>building a field mapping robot</b></span>
+      </div>
+    </div>
+
+    <h1 class="hero-name" aria-label="Aarav Baral">
+      <span class="word" aria-hidden="true">
+        <span class="l outline">A</span><span class="l outline">A</span><span class="l outline">R</span><span class="l outline">A</span><span class="l outline">V</span>
+      </span>
+      <span class="word" aria-hidden="true">
+        <span class="l solid">B</span><span class="l solid">A</span><span class="l solid">R</span><span class="l solid">A</span><span class="l solid">L</span>
+      </span>
+    </h1>
+
+    <div class="hero-grid">
+
+      <div class="hero-left">
+        <h2>Robotics Innovator &amp; Actor</h2>
+
+        <p class="hero-mission">
+          I build machines for the problems most people overlook.
+        </p>
+
+        <div class="hero-currently">
+          <h4>Currently</h4>
+          <ul>
+            <li><strong>Field mapping robot</strong> — navigates and returns home on its own</li>
+            <li><strong>Research paper</strong> — awaiting publication</li>
+          </ul>
+        </div>
+
+        <div class="home-ctas">
+          <a href="portfolio.html" class="btn btn-dark magnetic">Enter Portfolio <span class="arw">↗</span></a>
+          <a href="portfolio.html" class="btn btn-ghost magnetic">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="home-portrait" id="portrait">
+        <img src="photo/1.jpg" alt="Portrait of Aarav Baral" onerror="this.remove()">
+      </div>
+
+      <div class="hero-right">
+        <h4>Connect</h4>
+        <a class="pill" href="https://instagram.com/aarav_baral" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a class="pill" href="https://www.linkedin.com/in/aarav-baral" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7 10v7M7 7v.01M11.5 17v-4a2.5 2.5 0 0 1 5 0v4"/></svg>
+          LinkedIn
+        </a>
+        <a class="pill" href="mailto:baralaarav5625@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+          Email
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="panel home-stats">
+    <div class="stat"><span class="stat-n" data-target="9">0</span><span class="stat-l">Awards &amp; Honors</span></div>
+    <div class="stat"><span class="stat-n" data-target="9">0</span><span class="stat-l">Projects &amp; Builds</span></div>
+    <div class="stat"><span class="stat-n" data-target="5">0</span><span class="stat-l">1st Place Wins</span></div>
+    <div class="stat"><span class="stat-n" data-target="1">0</span><span class="stat-l">Feature Film Role</span></div>
+  </section>
+
+  <footer class="panel foot">
+    <span>© <span id="yr"></span> Aarav Baral — Pokhara, Nepal</span>
+    <span>Designed &amp; built with curiosity.</span>
+    <a class="top magnetic" href="portfolio.html">View portfolio <span class="arw">→</span></a>
+  </footer>
+
+</div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+document.querySelectorAll('.stat-n').forEach(el => {
+  const target = Number(el.dataset.target || 0);
+  const duration = 1400;
+  const start = performance.now();
+  const pad = 2;
+  function tick(now){
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const val = Math.round(eased * target);
+    el.textContent = String(val).padStart(pad, '0');
+    if (t < 1) requestAnimationFrame(tick);
+    else el.textContent = String(target).padStart(pad, '0');
+  }
+  setTimeout(() => requestAnimationFrame(tick), 700);
+});
+
+/* Magnetic buttons — still work without custom cursor */
+document.querySelectorAll('.magnetic').forEach(el => {
+  const strength = 12;
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width  / 2;
+    const y = e.clientY - r.top  - r.height / 2;
+    el.style.transform = `translate(${x / r.width  * strength}px, ${y / r.height * strength}px)`;
+  });
+  el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+});
+
+/* Close mobile menu when link clicked */
+document.querySelectorAll('.mobile-menu-panel a').forEach(a => {
+  a.addEventListener('click', () => {
+    const menu = a.closest('.mobile-menu');
+    if (menu) menu.removeAttribute('open');
+  });
+});
+</script>
+</body>
+</html>
